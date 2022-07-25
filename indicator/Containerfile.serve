@@ -1,0 +1,6 @@
+FROM docker.io/library/ruby:3.1.2
+COPY Gemfile Gemfile.lock indicator_app.rb /usr/src/app
+WORKDIR /usr/src/app
+RUN bundle config set --local without development && bundle install
+EXPOSE 4567
+CMD ["bundle", "exec", "ruby", "indicator_app.rb"]

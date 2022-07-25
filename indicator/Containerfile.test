@@ -1,0 +1,6 @@
+FROM docker.io/library/ruby:3.1.2
+COPY Gemfile Gemfile.lock indicator_app.rb tests.rb /usr/src/app
+WORKDIR /usr/src/app
+RUN bundle install
+RUN bundle exec standardrb
+CMD ["bundle", "exec", "rspec", "tests.rb"]
