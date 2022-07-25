@@ -1,0 +1,23 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  run-suite:
+    name: Run suite
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+        - indicator
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run tests
+      run: |
+        cd ${{ matrix.app }}
+        podman build --tag test --file Containerfile.test .
+        podman start --attach `podman create test`
