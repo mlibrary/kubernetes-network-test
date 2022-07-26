@@ -3,5 +3,6 @@ RUN mkdir -p /usr/src/app
 COPY Gemfile Gemfile.lock indicator_app.rb /usr/src/app
 WORKDIR /usr/src/app
 RUN bundle config set --local without development && bundle install
+ENV RACK_ENV=production
 EXPOSE 4567
 CMD ["bundle", "exec", "ruby", "indicator_app.rb"]
