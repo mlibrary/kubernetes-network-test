@@ -14,10 +14,20 @@ jobs:
       matrix:
         app:
         - indicator
+        - monitor
+        - features
     steps:
     - uses: actions/checkout@v3
-    - name: Run tests
+    - name: Run unit tests
+      if: ${{ matrix.app != 'features' }}
       run: |
         cd ${{ matrix.app }}
         podman build --tag test --file Containerfile.test .
         podman start --attach `podman create test`
+    - name: Setup BATS
+      uses: mig4/setup-bats@v1
+      if: ${{ matrix.app == 'features' }}
+    - name: Run end-to-end tests
+      if: ${{ matrix.app == 'features' }}
+      run: |
+        bats features.bats
