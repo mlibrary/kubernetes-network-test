@@ -12,6 +12,11 @@ RSpec.describe "The indicator app" do
     Sinatra::Application
   end
 
+  it "responds ok to a liveness check" do
+    get("/-/liveness")
+    expect(last_response).to be_ok
+  end
+
   it "can add 1, 2, and 3 to get 6" do
     post("/jsonrpc", JSON.dump(
       jsonrpc: "2.0",

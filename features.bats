@@ -11,7 +11,12 @@
   podman start $indicator
   podman start $monitor
 
-  sleep 3
+  for i in http://localhost:{4567,4568}/-/liveness; do
+    while ! curl "$i"; do
+      sleep 1
+    done
+  done
+
   body=`curl http://localhost:4568/metrics`
 
   podman stop $indicator
@@ -31,7 +36,10 @@
   monitor=`podman create --network host --env INDICATORS=http://localhost:4567 monitor`
   podman start $monitor
 
-  sleep 3
+  while ! curl http://localhost:4568/-/liveness; do
+    sleep 1
+  done
+
   body=`curl http://localhost:4568/metrics`
 
   podman stop $monitor

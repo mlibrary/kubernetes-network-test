@@ -9,3 +9,7 @@ post "/jsonrpc" do
     result: o["params"].sum
   )
 end
+
+get "/-/liveness" do
+  ""
+end

@@ -11,3 +11,7 @@ get "/metrics" do
   metric_line = lambda { |i| "#{metric}{indicator=\"#{i}\"} #{IndicatorMonitor.new.active?(i) ? 1 : 0}\n" }
   help_comment + ENV["INDICATORS"].split(",").map { |i| metric_line.call(i) }.join("")
 end
+
+get "/-/liveness" do
+  ""
+end
