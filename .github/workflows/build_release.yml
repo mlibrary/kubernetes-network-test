@@ -22,7 +22,7 @@ jobs:
     - uses: docker/build-push-action@v2
       with:
         context: ${{ matrix.app }}
-        file: Containerfile.serve
+        file: ${{ matrix.app }}/Containerfile.serve
         push: true
         tags: |
           ghcr.io/mlibrary/kubernetes-network-test-${{ matrix.app }}:latest
