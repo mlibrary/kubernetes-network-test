@@ -1,4 +1,5 @@
 FROM docker.io/library/ruby:3.1.2
+RUN mkdir -p /usr/src/app
 COPY Gemfile Gemfile.lock indicator_app.rb /usr/src/app
 WORKDIR /usr/src/app
 RUN bundle config set --local without development && bundle install

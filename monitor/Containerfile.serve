@@ -1,4 +1,5 @@
 FROM docker.io/library/ruby:3.1.2
+RUN mkdir -p /usr/src/app
 COPY Gemfile Gemfile.lock monitor_app.rb /usr/src/app
 COPY lib /usr/src/app/lib
 WORKDIR /usr/src/app
