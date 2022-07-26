@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    #if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -16,6 +16,9 @@ jobs:
         - indicator
         - monitor
     steps:
+    - run: |
+        echo "${{ github.event.workflow_run }}"
+        echo "${{ github.event.workflow_run.conclusion }}"
     - uses: actions/checkout@v3
     - uses: docker/login-action@v1
       with:
