@@ -57,7 +57,7 @@ GEM
       rubocop-performance (= 1.14.3)
     tilt (2.0.11)
     unicode-display_width (2.2.0)
-    webrick (1.7.0)
+    webrick (1.8.1)
 
 PLATFORMS
   ruby
